@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 export default function Header() {
     return (
-        <nav className="sticky top-0 flex justify-between gap-4 px-3 py-2 bg-white">
+        <nav className="sticky top-0 flex justify-around px-3 py-2 bg-white">
             <Avatar>
                 <AvatarImage src='https://github.com/shadcn.png' />
                 <AvatarFallback>CN</AvatarFallback>
