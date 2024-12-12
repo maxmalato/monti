@@ -2,6 +2,7 @@ import { Search, ShoppingCart } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger, SheetDescription, SheetHeader, SheetFooter, SheetClose } from "./ui/sheet";
 import { Button } from "./ui/button";
+import Combobox from "./Combobox";
 
 export default function Header() {
     return (
@@ -12,6 +13,10 @@ export default function Header() {
             </Avatar>
 
             <div className="flex items-center gap-2 justify-center">
+                <div className="hidden md:block md:mr-5">
+                    <Combobox />
+                </div>
+
                 <input type="search" placeholder="Pesquisar" className="outline-none border p-1.5 rounded-lg" />
                 <Search className="cursor-pointer transition-colors hover:stroke-slate-400" />
             </div>

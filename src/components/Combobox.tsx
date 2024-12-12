@@ -19,36 +19,34 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover"
 
-// import { fetchProducts } from "@/lib/api"
-
-const frameworks = [
-    {
-        value: "next.js",
-        label: "Next.js",
-    },
-    {
-        value: "sveltekit",
-        label: "SvelteKit",
-    },
-    {
-        value: "nuxt.js",
-        label: "Nuxt.js",
-    },
-    {
-        value: "remix",
-        label: "Remix",
-    },
-    {
-        value: "astro",
-        label: "Astro",
-    },
-]
+import { fetchProducts } from "@/lib/api"
 
 export default function Combobox() {
-    // const products = await fetchProducts()
 
     const [open, setOpen] = React.useState(false)
     const [value, setValue] = React.useState("")
+    const [categories, setCategories] = React.useState<string[]>([])
+
+    React.useEffect(() => {
+        async function fecthCategories() {
+            try {
+                const response = await fetchProducts()
+
+                // Array from: converte o set para ser uma lista: string[]
+                const uniqueCategories = Array.from(
+                    // new Set: categorias únicas
+                    new Set(response.map((product: { category: string }) => product.category))
+                )
+
+                setCategories(uniqueCategories)
+
+            } catch (error) {
+                console.error("Erro ao buscar os dados de categorias", error)
+            }
+        }
+
+        fecthCategories()
+    }, [])
 
     return (
         <Popover open={open} onOpenChange={setOpen}>
@@ -57,11 +55,9 @@ export default function Combobox() {
                     variant="outline"
                     role="combobox"
                     aria-expanded={open}
-                    className="w-[200px] justify-between"
+                    className="w-[200px] justify-between h-7 md:h-auto"
                 >
-                    {value
-                        ? frameworks.find((framework) => framework.value === value)?.label
-                        : "Categorias"}
+                    {value || "Categorias"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -71,20 +67,20 @@ export default function Combobox() {
                     <CommandList>
                         <CommandEmpty>Categoria não encontrada.</CommandEmpty>
                         <CommandGroup>
-                            {frameworks.map((framework) => (
+                            {categories.map((category) => (
                                 <CommandItem
-                                    key={framework.value}
-                                    value={framework.value}
+                                    key={category}
+                                    value={category}
                                     onSelect={(currentValue) => {
                                         setValue(currentValue === value ? "" : currentValue)
                                         setOpen(false)
                                     }}
                                 >
-                                    {framework.label}
+                                    {category}
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === framework.value ? "opacity-100" : "opacity-0"
+                                            value === category ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>

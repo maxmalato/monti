@@ -10,13 +10,13 @@ export default async function Home() {
   return (
     <div>
       <Header />
-      <div className="border-t mx-8 my-3 pt-4">
+      <div className="md:hidden pl-16 border-t pt-4 mx-4 mt-2">
         <Combobox />
       </div>
-      <main className="mx-4">
+      <main className="mx-4 md:border-t md:mt-2 md:pt-2">
         <ul className="flex flex-col items-center md:flex-row md:flex-wrap md:gap-4 md:justify-center">
           {products.map((product) => (
-            <li key={product.id} className="flex flex-col items-center justify-center gap-4 border my-4 p-2 rounded-lg shadow-md h-96 w-80">
+            <li key={product.id} className="flex flex-col items-center justify-center gap-4 border my-4 p-2 rounded-lg shadow-md w-80">
               <h3 className="text-sm self-start bg-slate-100 px-3 py-1 rounded-lg">{product.category}</h3>
               <h2 className="text-xl line-clamp-1 text-center">{product.title}</h2>
               <div>
