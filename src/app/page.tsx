@@ -1,5 +1,5 @@
 import Combobox from "@/components/Combobox";
-import Header from "@/components/Header";
+import Header from "@/components/Header/Header";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { fetchProducts } from "@/lib/api";
 import { Plus, ShoppingCart } from "lucide-react";
@@ -17,12 +17,12 @@ export default async function Home() {
         <ul className="flex flex-col items-center md:flex-row md:flex-wrap md:gap-4 md:justify-center">
           {products.map((product) => (
             <li key={product.id} className="flex flex-col items-center justify-center gap-4 border my-4 p-2 rounded-lg shadow-md w-80">
-              <h3 className="text-sm self-start bg-slate-100 px-3 py-1 rounded-lg">{product.category}</h3>
+              <h3 className="text-sm self-start bg-slate-200 text-slate-600 px-3 py-1 rounded-lg">{product.category}</h3>
               <h2 className="text-xl line-clamp-1 text-center">{product.title}</h2>
               <div>
-                <img className="w-full h-40" src={product.image} alt={product.title} />
+                <img className="w-full h-40 mix-blend-darken" src={product.image} alt={product.title} />
               </div>
-              <p className="line-clamp-2 text-slate-500 text-center px-2">{product.description}</p>
+              <p className="line-clamp-2 text-slate-400 text-center px-2">{product.description}</p>
               <div className="flex items-center justify-around w-full">
                 <TooltipProvider>
                   <Tooltip>
