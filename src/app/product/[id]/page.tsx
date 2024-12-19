@@ -6,6 +6,7 @@ import { fetchProducts } from "@/lib/api";
 import { Product } from "@/types/product";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { ShoppingBag, Undo2 } from "lucide-react";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState<Product | null>(null)
@@ -46,18 +47,19 @@ export default function ProductDetails() {
 
     return (
         <div>
-            <Header showSearchBar={false} />
-            <div className="flex flex-col items-center gap-4">
+            <Header showSearchBar={false} showIconBack={true} />
+            <div className="flex flex-col items-center gap-4 border p-2 pb-6 shadow-md m-4 rounded-lg">
                 <div className="bg-slate-200 text-slate-600 px-3 py-1 rounded-lg w-fit self-start">{product.category}</div>
-                <img className="w-72 mix-blend-darken" src={product.image} alt={product.title} />
+                <img className="w-56 mix-blend-darken" src={product.image} alt={product.title} />
                 <h1 className="text-xl line-clamp-1 text-center">{product.title}</h1>
                 <h2 className="text-slate-700 text-center px-2">{product.description}</h2>
-                <p className="font-semibold bg-slate-200 p-3 rounded-lg text-slate-800 text-lg">$ {product.price}</p>
+                <p className="font-semibold bg-slate-200 p-3 rounded-lg text-slate-800 text-2xl">$ {product.price}</p>
+                <div className="flex gap-4 justify-center mt-5">
+                    <Button className="text-lg" type="submit">Comprar agora</Button>
+                    <Button className="text-lg" type="submit">Adicionar ao carrinho</Button>
+                </div>
             </div>
-            <div className="flex gap-4 justify-center mt-5">
-                <Button className="w-40" type="submit">Comprar agora</Button>
-                <Button className="w-40" type="submit">Adicionar ao carrinho</Button>
-            </div>
+
         </div>
     )
 }

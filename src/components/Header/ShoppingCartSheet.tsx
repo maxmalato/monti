@@ -28,7 +28,7 @@ export default function ShoppingCartSheet() {
                 </div>
                 <SheetFooter className="flw-64">
                     <SheetClose asChild>
-                        <Button type="submit">Finalizar pedido</Button>
+                        <Button className="text-lg" type="submit">Finalizar pedido</Button>
                     </SheetClose>
                 </SheetFooter>
             </SheetContent>
