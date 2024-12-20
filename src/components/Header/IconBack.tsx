@@ -1,17 +1,13 @@
-import { Undo2 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import Link from "next/link";
+import { Button } from "../ui/button";
+import { ChevronLeft } from "lucide-react";
 
 export default function IconBack() {
     return (
-        <TooltipProvider>
-            <Tooltip>
-                <TooltipTrigger className="bg-slate-200 rounded-lg flex items-center p-2 cursor-pointer transition-colors hover:bg-slate-400">
-                    <Undo2 />
-                </TooltipTrigger>
-                <TooltipContent>
-                    <p>Voltar</p>
-                </TooltipContent>
-            </Tooltip>
-        </TooltipProvider>
+        <Button variant="outline">
+            <Link href="/">
+                <ChevronLeft/>
+            </Link>
+        </Button>
     )
 }

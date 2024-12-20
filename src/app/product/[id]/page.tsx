@@ -6,7 +6,7 @@ import { fetchProducts } from "@/lib/api";
 import { Product } from "@/types/product";
 import { useParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag, Undo2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export default function ProductDetails() {
     const [product, setProduct] = useState<Product | null>(null)
@@ -42,21 +42,32 @@ export default function ProductDetails() {
     }
 
     if (!product) {
-        return <div>Carregando...</div>
+        return (
+            <div className="flex justify-center pt-10">
+                <Button disabled>
+                    <Loader2 className="animate-spin" />
+                    Aguarde...
+                </Button>
+            </div>
+        )
     }
 
     return (
         <div>
             <Header showSearchBar={false} showIconBack={true} />
-            <div className="flex flex-col items-center gap-4 border p-2 pb-6 shadow-md m-4 rounded-lg">
-                <div className="bg-slate-200 text-slate-600 px-3 py-1 rounded-lg w-fit self-start">{product.category}</div>
-                <img className="w-56 mix-blend-darken" src={product.image} alt={product.title} />
-                <h1 className="text-xl line-clamp-1 text-center">{product.title}</h1>
-                <h2 className="text-slate-700 text-center px-2">{product.description}</h2>
-                <p className="font-semibold bg-slate-200 p-3 rounded-lg text-slate-800 text-2xl">$ {product.price}</p>
-                <div className="flex gap-4 justify-center mt-5">
-                    <Button className="text-lg" type="submit">Comprar agora</Button>
-                    <Button className="text-lg" type="submit">Adicionar ao carrinho</Button>
+            <div className="border p-2 pb-4 rounded-lg mx-4">
+                <div className="flex flex-col items-center gap-2">
+                    <div className="bg-slate-200 text-slate-600 p-1 rounded-md w-fit self-start">{product.category}</div>
+                    <img className="w-56 mix-blend-darken" src={product.image} alt={product.title} />
+                </div>
+                <div className="flex flex-col gap-2 mt-2">
+                    <h1 className="text-xl line-clamp-1 text-center">{product.title}</h1>
+                    <h2 className="text-slate-700 text-center px-2">{product.description}</h2>
+                    <p className="font-semibold bg-slate-200 p-3 rounded-lg text-slate-800 text-2xl w-40 self-center text-center">$ {product.price}</p>
+                </div>
+                <div className="flex flex-col items-center gap-3 mt-7">
+                    <Button className="text-lg w-60" type="submit">Comprar agora</Button>
+                    <Button className="text-lg w-60" variant="outline" type="submit">Adicionar ao carrinho</Button>
                 </div>
             </div>
 
