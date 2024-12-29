@@ -56,7 +56,7 @@ export default function ProductDetails() {
         <div>
             <Header showSearchBar={false} showIconBack={true} />
             <div className="border p-2 pb-4 rounded-lg mx-4">
-                <div className="flex flex-col items-center gap-2">
+                <div className="flex flex-col items-center gap-3">
                     <div className="bg-slate-200 text-slate-600 p-1 rounded-md w-fit self-start">{product.category}</div>
                     <img className="w-56 mix-blend-darken" src={product.image} alt={product.title} />
                 </div>
