@@ -14,15 +14,18 @@ interface ProductCardProps {
 }
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([]); // Listar todos os produtos
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]) // Produtos filtrados
+  const [selectedCategory, setSelectCategory] = useState<String>("") // Categoria selecionada
   const [error, setError] = useState<string | null>(null);
 
   // Busca os produtos no lado do cliente
   useEffect(() => {
     async function loadProducts() {
       try {
-        const data:any = await fetchProducts();
+        const data: any = await fetchProducts();
         setProducts(data);
+        setFilteredProducts(data)
       } catch (err: any) {
         setError(err.message);
       }
@@ -31,11 +34,19 @@ export default function Home() {
     loadProducts();
   }, []);
 
+  useEffect(() => {
+    if (selectedCategory === "" || selectedCategory === "Todos") {
+      setFilteredProducts(products)
+    } else {
+      setFilteredProducts(products.filter((product) => product.category === selectedCategory))
+    }
+  }, [selectedCategory, products])
+
   return (
     <div>
       <Header />
       <div className="md:hidden pl-16 border-t pt-4 mx-4 mt-2">
-        <Combobox />
+        <Combobox selectCategory={selectedCategory} setSelectCategory={setSelectCategory} />
       </div>
       <main className="mx-4 md:border-t md:mt-2 md:pt-2">
         {error ? (

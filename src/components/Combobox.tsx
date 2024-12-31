@@ -21,24 +21,25 @@ import {
 
 import { fetchProducts } from "@/lib/api"
 
-export default function Combobox() {
+interface ComboboxProps{
+    selectCategory: String,
+    setSelectCategory: (category: String) => void
+}
+
+export default function Combobox({ selectCategory, setSelectCategory}: ComboboxProps) {
 
     const [open, setOpen] = React.useState(false)
-    const [value, setValue] = React.useState("")
     const [categories, setCategories] = React.useState<string[]>([])
 
     React.useEffect(() => {
         async function fecthCategories() {
             try {
                 const response = await fetchProducts()
-
-                // Array from: converte o set para ser uma lista: string[]
                 const uniqueCategories = Array.from(
                     // new Set: categorias únicas
                     new Set(response.map((product: { category: string }) => product.category))
                 )
-
-                setCategories(uniqueCategories)
+                setCategories(["Todos", ...uniqueCategories])
 
             } catch (error) {
                 console.error("Erro ao buscar os dados de categorias", error)
@@ -57,7 +58,7 @@ export default function Combobox() {
                     aria-expanded={open}
                     className="w-[200px] justify-between h-7 md:h-auto"
                 >
-                    {value || "Categorias"}
+                    {selectCategory || "Categorias"}
                     <ChevronsUpDown className="opacity-50" />
                 </Button>
             </PopoverTrigger>
@@ -72,7 +73,7 @@ export default function Combobox() {
                                     key={category}
                                     value={category}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
+                                        setSelectCategory(currentValue)
                                         setOpen(false)
                                     }}
                                 >
@@ -80,7 +81,7 @@ export default function Combobox() {
                                     <Check
                                         className={cn(
                                             "ml-auto",
-                                            value === category ? "opacity-100" : "opacity-0"
+                                            selectCategory === category ? "opacity-100" : "opacity-0"
                                         )}
                                     />
                                 </CommandItem>
