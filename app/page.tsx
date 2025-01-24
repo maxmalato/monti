@@ -2,15 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { fetchProducts } from "./services/api";
-
-interface Product {
-  id: number
-  title: string
-  description: string
-  category?: string
-  price?: number
-  stock?: number
-}
+import { Product } from "./types/product";
+import ProductCard from "./components/ProductCard";
 
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([])
@@ -31,14 +24,11 @@ export default function Home() {
   return (
     <main>
       <h1>Produtos</h1>
-      <ul>
+      <div>
         {products.map((p) => (
-          <li key={p.id}>
-            <h2 className="text-2xl">{p.title}</h2>
-            <p>{p.description}</p>
-          </li>
+          <ProductCard key={p.id} product={p} />
         ))}
-      </ul>
+      </div>
     </main>
   );
 }
