@@ -9,20 +9,19 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
     return (
-        <section className="border mb-2 p-3 flex flex-col items-center bg-slate-100 gap-3">
-            <p className="self-start p-2 bg-white rounded-md text-sm font-semibold drop-shadow-md">{product.category}</p>
-            <h1 className="font-semibold text-xl">{product.title}</h1>
-            <img className="bg-slate-300 rounded-lg" src={product.thumbnail} alt={product.title} />
+        <section className="border p-3 flex flex-col items-center rounded-md w-80 gap-4">
+            <p className="self-start p-2 bg-white rounded-md text-sm drop-shadow-md">{product.category}</p>
+            <h1 className="font-semibold text-xl line-clamp-1">{product.title}</h1>
+            <img className="bg-gradient-to-t from-slate-50 to-slate-300 rounded-md drop-shadow-md" src={product.thumbnail} alt={product.title} />
             <p className="text-center line-clamp-2">{product.description}</p>
             <div className="flex items-center justify-around w-full">
-                <p className="text-2xl font-semibold bg-white p-2 rounded-md drop-shadow-sm">$ {product.price}</p>
-                <p className="border-l pl-2 border-slate-800"><span className="font-semibold">Quantidade: </span>{product.stock}</p>
-            </div>
-            <div className="flex gap-4">
+                <p className="text-2xl font-semibold border-b-2 px-2 transition-colors hover:border-slate-900">$ {product.price}</p>
                 <Link href={`/products/${product.id}`}>
                     <Button variant="link">Mais detalhes</Button>
                 </Link>
-
+            </div>
+            <div className="flex gap-6 mt-5 items-center">
+                <p className="text-sm">Quantidade:{product.stock}</p>
                 <Button variant="outline">
                     <ShoppingCart /> Adicionar
                 </Button>
