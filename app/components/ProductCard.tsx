@@ -23,7 +23,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             <div className="flex gap-6 mt-5 items-center">
                 <p className="text-sm">Quantidade:{product.stock}</p>
                 <Button variant="outline">
-                    <ShoppingCart /> Adicionar
+                    Adicionar <ShoppingCart/>
                 </Button>
             </div>
         </section>
