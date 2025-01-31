@@ -16,7 +16,7 @@ export const fetchProducts = async () => {
 export const fetchProductId = async (id: string | string[]) => {
     const responseId = await fetch(`${BASE_URL}/products/${id}`)
 
-    if (responseId.ok) {
+    if (!responseId.ok) {
         throw new Error("Erro ao buscar um produto na API.")
     }
 

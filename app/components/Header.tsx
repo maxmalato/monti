@@ -4,7 +4,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
-import { ShoppingBag } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 
 
 const Header = () => {
@@ -14,7 +14,7 @@ const Header = () => {
                 <h1 className="font-semibold text-xl cursor-pointer hover:text-slate-700">Monti.</h1>
                 <TooltipProvider>
                     <Tooltip>
-                        <TooltipTrigger><ShoppingBag/></TooltipTrigger>
+                        <TooltipTrigger><ShoppingCart/></TooltipTrigger>
                         <TooltipContent>
                             <p>Minhas compras</p>
                         </TooltipContent>
