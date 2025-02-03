@@ -22,7 +22,7 @@ const Footer = () => {
                 </div>
             </section>
 
-            <div className="md:flex md:gap-10 md:mb-10">
+            <div className="md:flex md:gap-16 md:mb-10">
                 <section className="md:w-full">
                     <h2 className="font-semibold text-lg">Empresa</h2>
                     <Accordion type="single" collapsible className="w-full">

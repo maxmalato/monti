@@ -4,11 +4,17 @@ const BASE_URL = "https://dummyjson.com"
 export const fetchProducts = async () => {
     const response = await fetch(`${BASE_URL}/products`)
 
-    if (!response.ok) {
-        throw new Error("Erro ao buscar os produtos na API.")
-    }
+    try {
+        if (!response.ok) {
+            throw new Error("Erro ao buscar os produtos na API.")
+        }
 
-    return response.json()
+        return await response.json()
+    } catch (error) {
+        console.error("Erro ao buscar os produtos.")
+        // Resposta para o cliente
+        throw new Error("Ocorreu um problema. Tente novamente mais tarde.")
+    }
 }
 
 
@@ -16,9 +22,14 @@ export const fetchProducts = async () => {
 export const fetchProductId = async (id: string | string[]) => {
     const responseId = await fetch(`${BASE_URL}/products/${id}`)
 
-    if (!responseId.ok) {
-        throw new Error("Erro ao buscar um produto na API.")
-    }
+    try {
+        if (!responseId.ok) {
+            throw new Error("Erro ao buscar um produto na API.")
+        }
 
-    return responseId.json()
+        return responseId.json()
+    } catch (error) {
+        console.error("Erro ao buscar os produtos.")
+        throw new Error("Ocorreu um problema. Tente novamente mais tarde.")
+    }
 }
