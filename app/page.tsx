@@ -1,33 +1,15 @@
-"use client"
-
-import { useEffect, useState } from "react";
 import { fetchProducts } from "./services/api";
+import ProductList from "./components/ProductList";
 import { Product } from "./types/product";
-import ProductCard from "./components/ProductCard";
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([])
+export default async function Home() {
+  const products: Product[] = await fetchProducts(); // Busca informações da API
 
-  useEffect(() => {
-    const loadProducts = async () => {
-      try {
-        const { products: data } = await fetchProducts()
-        setProducts(data)
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    loadProducts()
-  }, [])
+  console.log(products)
 
   return (
     <main>
-      <div className="flex flex-col gap-6 items-center md:flex-row md:flex-wrap md:justify-center">
-        {products.map((p) => (
-          <ProductCard key={p.id} product={p} />
-        ))}
-      </div>
+      <ProductList products={products} />
     </main>
-  );
-}
+  )
+};

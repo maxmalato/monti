@@ -9,9 +9,12 @@ export const fetchProducts = async () => {
             throw new Error("Erro ao buscar os produtos na API.")
         }
 
-        return await response.json()
+        const { products } = await response.json()
+
+        return products
+
     } catch (error) {
-        console.error("Erro ao buscar os produtos.")
+        console.error("Erro ao buscar os produtos.", error)
         // Resposta para o cliente
         throw new Error("Ocorreu um problema. Tente novamente mais tarde.")
     }
