@@ -22,12 +22,12 @@ export const fetchProducts = async () => {
 
 
 // API para buscar produto por ID
-export const fetchProductId = async (id: string | string[]) => {
+export const fetchProductId = async (id: string) => {
     const responseId = await fetch(`${BASE_URL}/products/${id}`)
 
     try {
         if (!responseId.ok) {
-            throw new Error("Erro ao buscar um produto na API.")
+            throw new Error("Erro ao buscar os detalhes do produto.")
         }
 
         return responseId.json()

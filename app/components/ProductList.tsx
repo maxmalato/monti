@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link";
-import { Product } from "../types/product";
-import { Button } from "@/components/ui/button";
-import { ShoppingCart } from "lucide-react";
-import Image from "next/image";
+import Link from "next/link"
+import { Product } from "../types/product"
+import { Button } from "@/components/ui/button"
+import { ShoppingCart } from "lucide-react"
+import Image from "next/image"
 
 interface ProductListProps {
     products: Product[]
@@ -14,7 +14,7 @@ export default function ProductList({ products }: ProductListProps) {
     return (
         <main className="flex flex-col gap-3 items-center md:flex-row md:flex-wrap md:justify-center">
             {products.map((product) => (
-                <section key={product.id} className="border p-3 flex flex-col items-center rounded-md w-3/4 md:w-80 gap-3">
+                <section key={product.id} className="border p-3 flex flex-col items-center rounded-md w-3/4 md:w-80 gap-3 mb-4">
                     <h3 className="self-start p-2 bg-white rounded-md text-sm drop-shadow-md">{product.category}</h3>
                     <h1 className="font-semibold text-xl line-clamp-1">{product.title}</h1>
 
@@ -33,4 +33,4 @@ export default function ProductList({ products }: ProductListProps) {
             ))}
         </main>
     )
-};
+}
