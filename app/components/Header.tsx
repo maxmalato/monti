@@ -15,14 +15,16 @@ const Header = () => {
                 <Link href="/">
                     <h1 className="font-semibold text-xl cursor-pointer hover:text-slate-700">Monti.</h1>
                 </Link>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger><ShoppingCart /></TooltipTrigger>
-                        <TooltipContent>
-                            <p>Minhas compras</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                <Link href="/cart">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger><ShoppingCart /></TooltipTrigger>
+                            <TooltipContent>
+                                <p>Minhas compras</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </Link>
             </div>
         </header>
     )

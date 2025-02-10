@@ -5,12 +5,14 @@ import { Product } from "../types/product"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
 import Image from "next/image"
-
+import { useCartStore } from "../store/cartStore"
 interface ProductListProps {
     products: Product[]
 }
 
 export default function ProductList({ products }: ProductListProps) {
+    const { addToCart } = useCartStore()
+    
     return (
         <main className="flex flex-col gap-3 items-center md:flex-row md:flex-wrap md:justify-center">
             {products.map((product) => (
@@ -26,7 +28,7 @@ export default function ProductList({ products }: ProductListProps) {
                             <Button variant="link">Mais detalhes</Button>
                         </Link>
                     </div>
-                    <Button variant="default" className="w-full mt-4">
+                    <Button variant="default" className="w-full mt-4" onClick={() => addToCart(product)}>
                         <ShoppingCart /> Adicionar no carrinho
                     </Button>
                 </section>
