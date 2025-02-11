@@ -3,12 +3,12 @@ import ProductList from "./components/ProductList"
 import { Product } from "./types/product"
 
 export default async function Home() {
-  const products: Product[] = await fetchProducts(); // Busca informações da API
+  const products: Product[] = await fetchProducts();
 
   console.log(products)
 
   return (
-    <main>
+    <main className="my-4">
       <ProductList products={products} />
     </main>
   )

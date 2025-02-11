@@ -1,29 +1,31 @@
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip"
+"use client"
+
 import { ShoppingCart } from "lucide-react"
 import Link from "next/link"
+import { useCartStore } from "../store/cartStore"
+import { Button } from "@/components/ui/button"
 
 
 const Header = () => {
+    const { cart } = useCartStore()
+    const cartCount = cart.length
+
     return (
-        <header className="sticky z-10 top-3">
-            <div className="flex justify-between px-4 py-2 rounded-md mx-2 items-center drop-shadow-md bg-white mb-10">
+        <header className="sticky z-10 top-3 h-fit">
+            <div className="flex justify-between p-2 mx-2 md:mx-0 rounded-md items-center drop-shadow-md bg-white">
                 <Link href="/">
                     <h1 className="font-semibold text-xl cursor-pointer hover:text-slate-700">Monti.</h1>
                 </Link>
                 <Link href="/cart">
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger><ShoppingCart /></TooltipTrigger>
-                            <TooltipContent>
-                                <p>Minhas compras</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
+                    <Button variant="ghost" className="relative">
+                        <ShoppingCart/>
+
+                        {cartCount > 0 && (
+                            <span className="absolute -top-1 -right-0 bg-red-600 text-white text-xs font-bold size-5 flex items-center justify-center rounded-full">
+                                {cartCount}
+                            </span>
+                        )}
+                    </Button>
                 </Link>
             </div>
         </header>
