@@ -12,7 +12,7 @@ const Header = () => {
 
     return (
         <header className="sticky z-10 top-3 h-fit">
-            <div className="flex justify-between p-2 mx-2 md:mx-0 rounded-md items-center drop-shadow-md bg-white">
+            <div className="flex justify-between p-2 mx-2 rounded-md items-center drop-shadow-md bg-white">
                 <Link href="/">
                     <h1 className="font-semibold text-xl cursor-pointer hover:text-slate-700">Monti.</h1>
                 </Link>

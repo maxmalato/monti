@@ -1,8 +1,6 @@
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 import { Product } from "../types/product"
-import { BlobOptions } from "buffer"
-
 interface CartState {
     cart: Product[]
     addToCart: (product: Product) => void
