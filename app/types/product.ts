@@ -7,5 +7,4 @@ export interface Product {
     price: number
     stock: number
     reviews?: string
-    quantify?: number | undefined
 }
