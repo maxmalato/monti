@@ -16,7 +16,7 @@ export default function CartPage() {
             {cart.length === 0 ? (
                 <p className="text-center">Seu carrinho está vazio.</p>
             ) : (
-                <ul className="flex flex-col items-center gap-5 w-full px-2 md:grid md:grid-cols-2 md:justify-items-center lg:grid-cols-3">
+                <ul className="flex flex-col items-center gap-5 w-full px-2 md:grid md:grid-cols-2 md:justify-items-center">
                     {cart.map((item) => (
                         <li key={item.id} className="border p-3 rounded-lg w-full">
                             <div className="flex justify-between">
