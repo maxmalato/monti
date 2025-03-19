@@ -10,7 +10,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="border-t-2 mt-10 pt-4 px-4 rounded-t-[30px]">
+        <footer className="border-t mt-10 pt-4 px-4">
             <section className="flex justify-center gap-8 mb-7">
                 <div className="flex gap-1 transition-colors hover:text-pink-600 cursor-pointer">
                     <Instagram />

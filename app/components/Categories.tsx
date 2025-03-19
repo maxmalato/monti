@@ -23,7 +23,7 @@ export default function Categories({ products, onSelectCategory }: CategoriesPro
         <div className="flex justify-center space-x-4 px-2">
             <button
                 onClick={() => handleCategoryClick(null)}
-                className={`px-3 py-1 rounded ${selectedCategory === null ? 'bg-slate-700 text-white' : 'bg-gray-300'}`}
+                className={`px-2 py-1 rounded-xl ${selectedCategory === null ? 'bg-slate-700 text-white' : 'bg-gray-200'}`}
             >
                 Todos
             </button>
@@ -31,7 +31,7 @@ export default function Categories({ products, onSelectCategory }: CategoriesPro
                 <button
                     key={category}
                     onClick={() => handleCategoryClick(category)}
-                    className={`border-b-2 hover:border-gray-200 ${selectedCategory === category ? 'border-slate-700 text-slate-700' : 'border-gray-300'}`}
+                    className={`border px-2 py-1 rounded-xl hover:border-slate-700 ${selectedCategory === category ? 'border-slate-700 text-slate-700' : 'border-gray-300'}`}
                 >
                     {category}
                 </button>

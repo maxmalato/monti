@@ -17,7 +17,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     return (
         <section className="border p-3 flex flex-col items-center rounded-md gap-3 w-3/4 md:w-full md:border-none md:mb-10 my-4">
             <div className="flex items-center justify-between w-full mb-2">
-                <p className="self-start p-2 bg-white rounded-md text-sm drop-shadow-md">{product.category}</p>
+                <p className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md">{product.category}</p>
                 <p className="text-sm text-slate-600 md:font-semibold">Estoque: {product.stock}</p>
             </div>
             <h1 className="font-semibold text-xl md:text-center">{product.title}</h1>

@@ -31,13 +31,13 @@ export default function ProductList({ products }: ProductListProps) {
                 {filteredProducts.length === 0 ? (
                     <p>Nenhum produto encontrado.</p>
                 ) : (
-                    <ul className="flex flex-col gap-4 items-center my-10 px-3 md:grid md:grid-cols-2 md:gap-3 md:place-items-center lg:grid-cols-3">
+                    <div className="flex flex-col gap-4 items-center my-10 px-3 md:grid md:grid-cols-2 md:gap-3 md:place-items-center lg:grid-cols-3">
                         {filteredProducts.map((product) => {
                             const alreadyInCart = isInCart(product.id)
 
                             return (
                                 <section key={product.id} className="flex flex-col items-center border p-3 gap-4 w-3/4 md:w-fit">
-                                    <h3 className="self-start p-2 bg-white rounded-md text-sm drop-shadow-md">{product.category}</h3>
+                                    <h3 className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md">{product.category}</h3>
                                     <h1 className="font-semibold text-xl line-clamp-1">{product.title}</h1>
 
                                     <Image src={product.thumbnail} alt={product.title} width={500} height={500} />
@@ -59,7 +59,7 @@ export default function ProductList({ products }: ProductListProps) {
                                 </section>
                             )
                         })}
-                    </ul>
+                    </div>
                 )}
 
 
