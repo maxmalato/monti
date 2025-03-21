@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useCartStore } from "../store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Boxes, CheckCircle2, PackageCheck } from "lucide-react";
+// import InputMask from "react-input-mask";
 
 const CheckoutPage: React.FC = () => {
     const cart = useCartStore((state) => state.cart);
@@ -38,7 +39,7 @@ const CheckoutPage: React.FC = () => {
         <div className="p-6 max-w-3xl mx-auto">
             <div className="flex items-center gap-4 mb-6 justify-center">
                 <Boxes />
-                <h1 className="text-3xl font-semibold">Seus produtos:</h1>
+                <h1 className="text-3xl font-semibold">Seus produtos</h1>
             </div>
             {cart.length === 0 ? (
                 <p className="text-gray-600 text-center">Seu carrinho está vazio.</p>
@@ -57,10 +58,11 @@ const CheckoutPage: React.FC = () => {
                             </li>
                         ))}
                     </ul>
-                    <h2 className="text-xl font-semibold mb-4">
+                    <h2 className="text-2xl font-semibold mb-4">
                         Total: <span className="text-green-600">$ {total.toFixed(2)}</span>
                     </h2>
                     <form onSubmit={handleCheckout} className="flex flex-col gap-4">
+                        <h1 className="text-xl font-semibold text-gray-600">Informe seus dados:</h1>
                         {/* Nome */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">

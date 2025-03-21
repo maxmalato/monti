@@ -32,7 +32,7 @@ export const fetchProductId = async (id: string) => {
 
         return responseId.json()
     } catch (error) {
-        console.error("Erro ao buscar os produtos.")
+        console.error("Erro ao buscar os produtos.", error)
         throw new Error("Ocorreu um problema. Tente novamente mais tarde.")
     }
 }

@@ -84,21 +84,24 @@ export default function CartPage() {
               Total:{" "}
               <span className="font-semibold text-2xl">
                 ${" "}
-                {cart 
+                {cart
                   .reduce((acc, item) => acc + item.price * item.quantity, 0)
                   .toFixed(2)}
               </span>
             </p>
           </div>
-          <Button onClick={clearCart} className="w-96" variant="secondary">
-            <PackageX /> Limpar o carrinho
-          </Button>
 
-          <Link href="/checkout">
-            <Button className="w-96" variant="default">
-              <CheckCheck /> Ir para o checkout
+          <div className="flex gap-4">
+            <Button onClick={clearCart} variant="destructive">
+              <PackageX /> Limpar o carrinho
             </Button>
-          </Link>
+
+            <Link href="/checkout">
+              <Button variant="default">
+                <CheckCheck /> Ir para o checkout
+              </Button>
+            </Link>
+          </div>
         </>
       )}
     </main>
