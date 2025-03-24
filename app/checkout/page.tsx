@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
 import { useCartStore } from "../store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Boxes, CheckCircle2, PackageCheck } from "lucide-react";
-// import InputMask from "react-input-mask";
+import Vmasker from "vanilla-masker";
 
 const CheckoutPage: React.FC = () => {
     const cart = useCartStore((state) => state.cart);
@@ -12,11 +12,21 @@ const CheckoutPage: React.FC = () => {
     // Calcula o total do carrinho
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+    // Formata o campo de telefone
+    const phoneMask = (value: string) => Vmasker.toPattern(value, "(99) 99999-9999");
+
+    // Formata o campo de CPF
+    const cpfMask = (value: string) => Vmasker.toPattern(value, "999.999.999-99");
+
+    // Formata o campo de CEP
+    const cepMask = (value: string) => Vmasker.toPattern(value, "99999-999");
+
     // Estados para os campos do formulário
     const [name, setName] = useState("");
-    const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [cpf, setCpf] = useState("");
+    const [cep, setCep] = useState("");
+    const [address, setAddress] = useState("");
 
     // Função para lidar com a finalização da compra
     const handleCheckout = (e: React.FormEvent) => {
@@ -66,13 +76,13 @@ const CheckoutPage: React.FC = () => {
                         {/* Nome */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Nome:
+                                Nome completo:
                             </label>
                             <input
                                 type="text"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                placeholder="Digite seu nome"
+                                placeholder="Digite seu nome completo"
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
                             />
                         </div>
@@ -83,11 +93,12 @@ const CheckoutPage: React.FC = () => {
                                 Telefone:
                             </label>
                             <input
-                                type="tel"
+                                type="text"
                                 value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                                placeholder="Digite seu telefone"
+                                onChange={(e) => setPhone(phoneMask(e.target.value))}
+                                placeholder="(99) 98820-3040"
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+
                             />
                         </div>
 
@@ -99,8 +110,22 @@ const CheckoutPage: React.FC = () => {
                             <input
                                 type="text"
                                 value={cpf}
-                                onChange={(e) => setCpf(e.target.value)}
-                                placeholder="Digite seu CPF"
+                                onChange={(e) => setCpf(cpfMask(e.target.value))}
+                                placeholder="999.999.999-99"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                            />
+                        </div>
+
+                        {/* CEP */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                CEP:
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="91000-000"
+                                value={cep}
+                                onChange={(e) => setCep(cepMask(e.target.value))}
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
                             />
                         </div>
@@ -114,7 +139,7 @@ const CheckoutPage: React.FC = () => {
                                 type="text"
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
-                                placeholder="Digite seu endereço"
+                                placeholder="Av Brasil, 123, Centro, São Paulo, SP"
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
                             />
                         </div>
