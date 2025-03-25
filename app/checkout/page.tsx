@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useCartStore } from "../store/cartStore";
 import { Button } from "@/components/ui/button";
 import { Boxes, CheckCircle2, PackageCheck } from "lucide-react";
 import Vmasker from "vanilla-masker";
+import { fetchCep } from "../services/cep";
 
 const CheckoutPage: React.FC = () => {
     const cart = useCartStore((state) => state.cart);
@@ -15,34 +16,59 @@ const CheckoutPage: React.FC = () => {
     // Formata o campo de telefone
     const phoneMask = (value: string) => Vmasker.toPattern(value, "(99) 99999-9999");
 
-    // Formata o campo de CPF
-    const cpfMask = (value: string) => Vmasker.toPattern(value, "999.999.999-99");
-
     // Formata o campo de CEP
     const cepMask = (value: string) => Vmasker.toPattern(value, "99999-999");
+
+    //Formatar o campo de Estado
+    const stateMask = (value: string) => Vmasker.toPattern(value, "AA").toLocaleUpperCase();
 
     // Estados para os campos do formulário
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
-    const [cpf, setCpf] = useState("");
     const [cep, setCep] = useState("");
     const [address, setAddress] = useState("");
+    const [numAddress, setNumAddress] = useState("");
+    const [complement, setComplement] = useState("");
+    const [neighborhood, setNeighborhood] = useState("");
+    const [city, setCity] = useState("");
+    const [state, setState] = useState("");
+
+    useEffect(() => {
+        const searchAddres = async () => {
+            try {
+                const data = await fetchCep(cep);
+
+                setAddress(data.street || "");
+                setNeighborhood(data.neighborhood || "");
+                setCity(data.city);
+                setState(data.state);
+
+            } catch (error) {
+                console.error(error)
+                alert("CEP inválido. Verifique novamente ou preencha manualmente.")
+            }
+        }
+        if (cep.length === 9) {
+            searchAddres();
+        }
+
+    }, [cep]);
 
     // Função para lidar com a finalização da compra
     const handleCheckout = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !address || !phone || !cpf) {
+        if (!name || !phone || !cep || !address || !numAddress || !neighborhood || !city || !state) {
             alert("Por favor, preencha todos os campos.");
             return;
         }
 
         alert(`Compra finalizada com sucesso!
     Nome: ${name}
-    Endereço: ${address}
     Telefone: ${phone}
-    CPF: ${cpf}
-    Total: R$ ${total.toFixed(2)}`);
+    CEP: ${cep}
+    Endereço: ${address}
+    Total: $ ${total.toFixed(2)}`);
     };
 
     return (
@@ -102,20 +128,6 @@ const CheckoutPage: React.FC = () => {
                             />
                         </div>
 
-                        {/* CPF */}
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700">
-                                CPF:
-                            </label>
-                            <input
-                                type="text"
-                                value={cpf}
-                                onChange={(e) => setCpf(cpfMask(e.target.value))}
-                                placeholder="999.999.999-99"
-                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
-                            />
-                        </div>
-
                         {/* CEP */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
@@ -139,9 +151,80 @@ const CheckoutPage: React.FC = () => {
                                 type="text"
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
-                                placeholder="Av Brasil, 123, Centro, São Paulo, SP"
+                                placeholder="Av Brasil"
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
                             />
+                        </div>
+
+                        {/* Número */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Número:
+                            </label>
+                            <input
+                                type="text"
+                                value={numAddress}
+                                onChange={(e) => setNumAddress(e.target.value)}
+                                placeholder="123"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                            />
+                        </div>
+
+                        {/* Complemento */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Complemento (opcional):
+                            </label>
+                            <input
+                                type="text"
+                                value={complement}
+                                onChange={(e) => setComplement(e.target.value)}
+                                placeholder="Bloco A Apto 101 ou Proximo ao mercado"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                            />
+                        </div>
+
+                        {/* Bairro */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                Bairro:
+                            </label>
+                            <input
+                                type="text"
+                                value={neighborhood}
+                                onChange={(e) => setNeighborhood(e.target.value)}
+                                placeholder="Centro"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                            />
+                        </div>
+
+                        {/* Cidade e Estado */}
+                        <div className="flex gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Cidade:
+                                </label>
+                                <input
+                                    type="text"
+                                    value={city}
+                                    onChange={(e) => setCity(e.target.value)}
+                                    placeholder="Porto Alegre"
+                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                                />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">
+                                    Estado:
+                                </label>
+                                <input
+                                    type="text"
+                                    value={state}
+                                    onChange={(e) => setState(stateMask(e.target.value))}
+                                    placeholder="RS"
+                                    className="mt-1 block w-24 p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                                />
+                            </div>
                         </div>
 
                         <Button className="w-96 self-center" variant="default">
