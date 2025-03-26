@@ -1,14 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useCartStore } from "../store/cartStore";
-import { Button } from "@/components/ui/button";
-import { Boxes, CheckCircle2, PackageCheck } from "lucide-react";
 import Vmasker from "vanilla-masker";
+import { useCartStore } from "../store/cartStore";
 import { fetchCep } from "../services/cep";
+import { isValidEmail } from "@/lib/utils/validationEmail";
+
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast"
+import { Boxes, CheckCircle2, PackageCheck } from "lucide-react";
 
 const CheckoutPage: React.FC = () => {
     const cart = useCartStore((state) => state.cart);
+    const { toast } = useToast()
 
     // Calcula o total do carrinho
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
@@ -24,6 +28,8 @@ const CheckoutPage: React.FC = () => {
 
     // Estados para os campos do formulário
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [emailError, setEmailError] = useState("");
     const [phone, setPhone] = useState("");
     const [cep, setCep] = useState("");
     const [address, setAddress] = useState("");
@@ -32,6 +38,18 @@ const CheckoutPage: React.FC = () => {
     const [neighborhood, setNeighborhood] = useState("");
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
+
+    // Validação do e-mail
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setEmail(value)
+
+        if (!isValidEmail(value)) {
+            setEmailError("E-mail inválido.")
+        } else {
+            setEmailError("")
+        }
+    }
 
     useEffect(() => {
         const searchAddres = async () => {
@@ -58,18 +76,32 @@ const CheckoutPage: React.FC = () => {
     const handleCheckout = (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !phone || !cep || !address || !numAddress || !neighborhood || !city || !state) {
-            alert("Por favor, preencha todos os campos.");
+        if (!name || !email || !phone || !cep || !address || !numAddress || !neighborhood || !city || !state) {
+            toast({
+                title: "Erro",
+                description: "Por favor, preencha todos os campos.",
+                variant: "destructive"
+            });
             return;
         }
 
-        alert(`Compra finalizada com sucesso!
-    Nome: ${name}
-    Telefone: ${phone}
-    CEP: ${cep}
-    Endereço: ${address}
-    Total: $ ${total.toFixed(2)}`);
-    };
+        toast({
+            title: "Compra finalizada com sucesso.",
+            description: "Seu pedido foi recebido e está sendo processado."
+        })
+
+        // Limpeza dos dados depois da finalização da compra.
+        setName("")
+        setEmail("")
+        setPhone("")
+        setCep("")
+        setAddress("")
+        setNumAddress("")
+        setComplement("")
+        setNeighborhood("")
+        setCity("")
+        setState("")
+    }
 
     return (
         <div className="p-6 max-w-3xl mx-auto">
@@ -99,6 +131,7 @@ const CheckoutPage: React.FC = () => {
                     </h2>
                     <form onSubmit={handleCheckout} className="flex flex-col gap-4">
                         <h1 className="text-xl font-semibold text-gray-600">Informe seus dados:</h1>
+
                         {/* Nome */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
@@ -111,6 +144,21 @@ const CheckoutPage: React.FC = () => {
                                 placeholder="Digite seu nome completo"
                                 className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
                             />
+                        </div>
+
+                        {/* E-mail */}
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">
+                                E-mail:
+                            </label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={handleEmailChange}
+                                placeholder="contato@email.com.br"
+                                className="mt-1 block w-full p-2 border border-gray-300 rounded-xl shadow-sm focus:ring-green-500 focus:border-green-500"
+                            />
+                            {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
                         </div>
 
                         {/* Telefone */}
