@@ -97,7 +97,7 @@ export default function CartPage() {
             </Button>
 
             <Link href="/checkout">
-              <Button variant="default">
+              <Button variant="outline">
                 <CheckCheck /> Ir para o checkout
               </Button>
             </Link>

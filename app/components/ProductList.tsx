@@ -49,7 +49,7 @@ export default function ProductList({ products }: ProductListProps) {
                                         </Link>
                                     </div>
                                     <Button
-                                        variant="default"
+                                        variant="outline"
                                         className="w-full mt-4"
                                         onClick={() => addToCart(product)}
                                         disabled={alreadyInCart}

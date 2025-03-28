@@ -1,8 +1,9 @@
 "use client"
 
-import { ShoppingCart, UserCircle } from "lucide-react"
+import { Search, ShoppingCart, UserCircle } from "lucide-react"
 import Link from "next/link"
 import { useCartStore } from "../store/cartStore"
+import { Input } from "@/components/ui/input"
 
 const Header = () => {
     const { cart } = useCartStore()
@@ -14,6 +15,13 @@ const Header = () => {
                 <Link href="/">
                     <h1 className="font-semibold text-xl cursor-pointer hover:text-slate-700">Monti.</h1>
                 </Link>
+
+                <div className="flex items-center gap-2">
+                    <Input
+                        placeholder="Pesquise seu produto"
+                    />
+                    <Search className="cursor-pointer"/>
+                </div>
 
                 <div className="flex items-center space-x-4">
                     <UserCircle />

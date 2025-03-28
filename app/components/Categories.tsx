@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface CategoriesProps {
     products: { category: string }[]
@@ -20,21 +21,21 @@ export default function Categories({ products, onSelectCategory }: CategoriesPro
     }
 
     return (
-        <div className="flex justify-center space-x-4 px-2">
-            <button
+        <div className="flex gap-2 overflow-x-auto py-2 mx-10 md:justify-center md:mx-0">
+            <Button
                 onClick={() => handleCategoryClick(null)}
-                className={`px-2 py-1 rounded-xl ${selectedCategory === null ? 'bg-slate-700 text-white' : 'bg-gray-200'}`}
+                variant={`${selectedCategory === null ? "default" : "outline"}`}
             >
                 Todos
-            </button>
+            </Button>
             {categories.map(category => (
-                <button
+                <Button
                     key={category}
                     onClick={() => handleCategoryClick(category)}
-                    className={`border px-2 py-1 rounded-xl hover:border-slate-700 ${selectedCategory === category ? 'border-slate-700 text-slate-700' : 'border-gray-300'}`}
+                    variant={`${selectedCategory === category ? "default" : "ghost"}`}
                 >
                     {category}
-                </button>
+                </Button>
             ))}
         </div>
     )

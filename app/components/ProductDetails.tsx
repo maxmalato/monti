@@ -26,7 +26,7 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             <p className="indent-3 text-slate-500 md:px-20">{product.description}</p>
             <p className="text-3xl font-bold border-b-2 px-2 transition-colors hover:border-slate-900">$ {product.price}</p>
             <Button
-                variant="default"
+                variant="outline"
                 className="w-full mt-4 md:w-96"
                 onClick={() => addToCart(product)}
                 disabled={added}
