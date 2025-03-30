@@ -26,7 +26,7 @@ export default function Categories({ products, onSelectCategory }: CategoriesPro
                 onClick={() => handleCategoryClick(null)}
                 variant={`${selectedCategory === null ? "default" : "outline"}`}
             >
-                Todos
+                All
             </Button>
             {categories.map(category => (
                 <Button
