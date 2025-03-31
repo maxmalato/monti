@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCheck, Minus, PackageX, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 
-export default function CartPage() {
+const CartPage = () => {
   const {
     cart,
     removeFromCart,
@@ -16,7 +16,7 @@ export default function CartPage() {
   } = useCartStore();
 
   return (
-    <main className="flex flex-col gap-10 items-center my-4 min-h-96">
+    <main className="flex flex-col gap-10 items-center my-4 min-h-[35rem]">
       {cart.length === 0 ? (
         <p className="text-center">Seu carrinho está vazio.</p>
       ) : (
@@ -106,4 +106,6 @@ export default function CartPage() {
       )}
     </main>
   );
-}
+};
+
+export default CartPage;

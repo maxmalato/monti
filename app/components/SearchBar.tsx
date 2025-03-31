@@ -16,11 +16,11 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     return (
         <div className="flex justify-center mt-5">
             <div className="flex gap-2 items-center">
-                <Search />
                 <Input 
                     placeholder="Pesquise seu produto" 
                     onChange={handleInputChange}
                 />
+                <Search />
             </div>
         </div>
     );

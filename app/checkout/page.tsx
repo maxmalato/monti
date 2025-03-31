@@ -95,6 +95,7 @@ const CheckoutPage: React.FC = () => {
                 description: "Por favor, preencha todos os seus dados.",
                 variant: "destructive"
             });
+            
             return;
         }
 
@@ -119,7 +120,7 @@ const CheckoutPage: React.FC = () => {
     }
 
     return (
-        <div className="p-6 max-w-3xl mx-auto">
+        <div className="p-6 max-w-3xl mx-auto min-h-[35rem]">
             <div className="flex items-center gap-4 mb-6 justify-center">
                 <Boxes />
                 <h1 className="text-3xl font-semibold">Seus produtos</h1>

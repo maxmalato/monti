@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Product } from "../types/product";
@@ -34,7 +35,7 @@ export default function ProductList({ products }: ProductListProps) {
         <>
             <Categories products={products} onSelectCategory={setSelectedCategory} />
             <SearchBar onSearch={setSearchText} />
-            <main className="text-center">
+            <main className="text-center mt-3">
                 {filteredProducts.length === 0 ? (
                     <p>Nenhum produto encontrado.</p>
                 ) : (
