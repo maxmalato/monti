@@ -5,7 +5,6 @@ import { Product } from "../types/product"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart } from "lucide-react"
 import { useCartStore } from "../store/cartStore"
-
 interface ProductDetailsProps {
     product: Product
 }
@@ -14,10 +13,16 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
     const { addToCart, isInCart } = useCartStore()
     const added = isInCart(product.id)
 
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+
+        return date.toLocaleDateString("pt-BR");
+    };
+
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center w-full">
             <section className="border p-3 flex flex-col items-center rounded-md gap-3 w-3/4 md:w-full md:border-none md:mb-10 my-4">
-                <div className="flex items-center justify-between w-full mb-2">
+                <div className="flex justify-between md:justify-around items-center bord mb-2 w-full">
                     <p className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md">{product.category}</p>
                     <p className="text-sm text-slate-600 md:font-semibold">Estoque: {product.stock}</p>
                 </div>
@@ -36,19 +41,22 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                 </Button>
             </section>
 
-            <section className="self-start pl-2">
-                <h1 className="text-2xl">Comentários</h1>
+            <section className="self-start px-2 w-full">
+                <h1 className="text-2xl">Comentários:</h1>
 
-                <article>
+                <article className="pl-2">
                     {product.reviews?.length ? (
                         product.reviews.map((item) => (
-                            <ul key={item.id} className="mb-4 border-b p-2">
-                                <li className="text-slate-900 font-semibold text-lg">{item.reviewerName}</li>
-                                <li className=" text-slate-600 text-sm">{item.reviewerEmail}</li>
-                                <li className="text-slate-900 ">{item.comment}</li>
-                                <li className="">{item.date}</li>
-                                <li className="text-xs text-slate-400">Avaliação: {item.rating}/5</li>
-                            </ul>
+                            <div key={item.id} className="border rounded-lg p-2 my-3">
+                                <p className="text-xl">{item.reviewerName}</p>
+                                <p className="text-sm text-slate-500">{item.reviewerEmail}</p>
+                                <div className="my-3">
+                                    <p>{item.comment}</p>
+                                    <p className="text-xs text-slate-500 mt-1">{formatDate(item.date)}</p>
+                                </div>
+                                <p className="font-semibold">Avaliação: {item.rating}/5</p>
+
+                            </div>
                         ))
                     ) : (
                         <p className="text-slate-500">Nenhum comentário disponível.</p>
