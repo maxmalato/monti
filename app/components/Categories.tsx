@@ -6,7 +6,7 @@ interface CategoriesProps {
     onSelectCategory: (category: string | null) => void
 }
 
-export default function Categories({ products, onSelectCategory }: CategoriesProps) {
+const Categories = ({ products, onSelectCategory }: CategoriesProps) => {
     const [categories, setCategories] = useState<string[]>([])
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
 
@@ -39,4 +39,6 @@ export default function Categories({ products, onSelectCategory }: CategoriesPro
             ))}
         </div>
     )
-}
+};
+
+export default Categories;

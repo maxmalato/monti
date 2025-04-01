@@ -6,7 +6,7 @@ interface ProductPageProps {
     params: Promise<{ id: string }>
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+const ProductPage =  async ({ params }: ProductPageProps) => {
     const { id } = await params
     const product: Product = await fetchProductId(id)
     
@@ -15,4 +15,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <ProductDetails product={product} />
         </main>
     )
-}
+};
+
+export default ProductPage;

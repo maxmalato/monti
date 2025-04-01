@@ -145,6 +145,10 @@ const CheckoutPage: React.FC = () => {
                     <h2 className="text-2xl font-semibold mb-4">
                         Total: <span className="text-green-600">$ {total.toFixed(2)}</span>
                     </h2>
+
+                    <div className="bg-red-600 p-2 rounded-lg my-3">
+                        <p className="text-sm text-white text-center">Não se preocupe que os seus dados não serão gravados. Isso é apenas uma simulação.</p>
+                    </div>
                     <form onSubmit={handleCheckout} className="flex flex-col gap-4">
                         <h1 className="text-2xl font-semibold text-gray-600 text-center">Informe seus dados:</h1>
 

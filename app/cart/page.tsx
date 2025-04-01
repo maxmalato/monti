@@ -91,7 +91,7 @@ const CartPage = () => {
             </p>
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-col gap-4 md:flex-row">
             <Button onClick={clearCart} variant="destructive">
               <PackageX /> Limpar o carrinho
             </Button>

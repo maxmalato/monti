@@ -14,7 +14,7 @@ interface ProductListProps {
     products: Product[];
 }
 
-export default function ProductList({ products }: ProductListProps) {
+const ProductList = ({ products }: ProductListProps) => {
     const { addToCart, isInCart } = useCartStore();
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [searchText, setSearchText] = useState<string>(""); // Estado da pesquisa
@@ -72,4 +72,6 @@ export default function ProductList({ products }: ProductListProps) {
             </main>
         </>
     );
-}
+};
+
+export default ProductList;

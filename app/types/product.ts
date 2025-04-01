@@ -7,7 +7,6 @@ export interface Product {
   price: number;
   stock: number;
 reviews?: Array<{
-    id: number
     rating: number,
     comment: string,
     date: string,

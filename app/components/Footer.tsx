@@ -66,7 +66,7 @@ const Footer = () => {
                 </section>
             </div>
 
-            <p className="text-center">Monti. © <span>{currentYear}</span> - Todos os direitos reservados.</p>            
+            <p className="text-center">Monti. © <span>{currentYear}</span> - Todos os direitos reservados.</p>
         </footer>
     )
 }

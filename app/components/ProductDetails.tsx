@@ -9,7 +9,7 @@ interface ProductDetailsProps {
     product: Product
 }
 
-export default function ProductDetails({ product }: ProductDetailsProps) {
+const ProductDetails = ({ product }: ProductDetailsProps) => {
     const { addToCart, isInCart } = useCartStore()
     const added = isInCart(product.id)
 
@@ -46,8 +46,8 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
 
                 <article className="pl-2">
                     {product.reviews?.length ? (
-                        product.reviews.map((item) => (
-                            <div key={item.id} className="border rounded-lg p-2 my-3">
+                        product.reviews.map((item, index) => (
+                            <div key={index} className="border rounded-lg p-2 my-3">
                                 <p className="text-xl">{item.reviewerName}</p>
                                 <p className="text-sm text-slate-500">{item.reviewerEmail}</p>
                                 <div className="my-3">
@@ -55,7 +55,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
                                     <p className="text-xs text-slate-500 mt-1">{formatDate(item.date)}</p>
                                 </div>
                                 <p className="font-semibold">Avaliação: {item.rating}/5</p>
-
                             </div>
                         ))
                     ) : (
@@ -65,5 +64,6 @@ export default function ProductDetails({ product }: ProductDetailsProps) {
             </section>
         </div>
     )
+};
 
-}
+export default ProductDetails;
