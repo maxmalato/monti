@@ -44,7 +44,7 @@ const ProductList = ({ products }: ProductListProps) => {
                             const alreadyInCart = isInCart(product.id);
 
                             return (
-                                <section key={product.id} className="flex flex-col items-center border p-3 gap-4 w-3/4 md:w-fit">
+                                <section key={product.id} className="flex flex-col items-center border p-3 gap-4 mx-2 md:mx-0">
                                     <h3 className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md">{product.category}</h3>
                                     <h1 className="font-semibold text-xl line-clamp-1">{product.title}</h1>
 
