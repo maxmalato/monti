@@ -25,5 +25,5 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
         </div>
     );
 };
-
+    
 export default SearchBar;

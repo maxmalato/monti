@@ -17,7 +17,7 @@ interface ProductListProps {
 const ProductList = ({ products }: ProductListProps) => {
     const { addToCart, isInCart } = useCartStore();
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-    const [searchText, setSearchText] = useState<string>(""); // Estado da pesquisa
+    const [searchText, setSearchText] = useState<string>("");
     const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
 
     // Filtra os produtos quando a categoria ou a pesquisa mudar
