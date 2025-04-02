@@ -95,7 +95,7 @@ const CheckoutPage: React.FC = () => {
                 description: "Por favor, preencha todos os seus dados.",
                 variant: "destructive"
             });
-            
+
             return;
         }
 
@@ -121,20 +121,20 @@ const CheckoutPage: React.FC = () => {
 
     return (
         <div className="p-6 max-w-3xl mx-auto min-h-[35rem]">
-            <div className="flex items-center gap-4 mb-6 justify-center">
-                <Boxes />
+            <div className="flex items-center gap-4 mb-6 justify-center" aria-label="Seus produtos">
+                <Boxes aria-hidden="true" />
                 <h1 className="text-3xl font-semibold">Seus produtos</h1>
             </div>
             {cart.length === 0 ? (
-                <p className="text-gray-600 text-center">Seu carrinho está vazio.</p>
+                <p className="text-gray-600 text-center" role="alert" >Seu carrinho está vazio.</p>
             ) : (
                 <>
-                    <ul className="mb-6">
+                    <ul className="mb-6" aria-live="polite">
                         {cart.map((item) => (
                             <li key={item.id} className="flex justify-between items-center my-4 border-b pb-2">
                                 <div>
-                                    <div className="line-clamp-1 w-56 text-sm md:line-clamp-0 md:w-fit md:text-base">{item.title}</div> 
-                                    <div className="text-sm font-semibold text-gray-500">{item.quantity} x $ {item.price.toFixed(2)}</div>
+                                    <div className="line-clamp-1 w-56 text-sm md:line-clamp-0 md:w-fit md:text-base">{item.title}</div>
+                                    <div className="text-sm font-semibold text-gray-500" aria-label={`Quantidade: ${item.quantity}, Preço unitário: $${item.price.toFixed(2)}`}>{item.quantity} x $ {item.price.toFixed(2)}</div>
                                 </div>
                                 <div className="font-semibold">
                                     $ {(item.price * item.quantity).toFixed(2)}
@@ -147,7 +147,7 @@ const CheckoutPage: React.FC = () => {
                     </h2>
 
                     <div className="bg-red-600 p-2 rounded-lg my-3">
-                        <p className="text-sm text-white text-center">Não se preocupe que os seus dados não serão gravados. Isso é apenas uma simulação.</p>
+                        <p className="text-sm text-white text-center" role="alert">Não se preocupe que os seus dados não serão gravados. Isso é apenas uma simulação.</p>
                     </div>
                     <form onSubmit={handleCheckout} className="flex flex-col gap-4">
                         <h1 className="text-2xl font-semibold text-gray-600 text-center">Informe seus dados:</h1>
@@ -173,6 +173,7 @@ const CheckoutPage: React.FC = () => {
                                 value={email}
                                 placeholder="contato@email.com.br"
                                 onChange={handleEmailChange}
+                                aria-describedby={emailError ? "email-error" : undefined}
                             />
                             {emailError && <p className="text-red-500 text-sm pt-1">{emailError}</p>}
                         </div>
@@ -280,8 +281,8 @@ const CheckoutPage: React.FC = () => {
                             </div>
                         </div>
 
-                        <Button variant="default" className="mt-10">
-                            <CheckCircle2 /> Finalizar Compra
+                        <Button variant="default" className="mt-10" aria-label="Finalizar a compra">
+                            <CheckCircle2 aria-hidden="true" /> Finalizar Compra
                         </Button>
                     </form>
                 </>

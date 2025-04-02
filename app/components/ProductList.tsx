@@ -37,7 +37,7 @@ const ProductList = ({ products }: ProductListProps) => {
             <SearchBar onSearch={setSearchText} />
             <main className="text-center mt-3">
                 {filteredProducts.length === 0 ? (
-                    <p>Nenhum produto encontrado.</p>
+                    <p role="alert">Nenhum produto encontrado.</p>
                 ) : (
                     <div className="flex flex-col gap-4 items-center my-10 px-3 md:grid md:grid-cols-2 md:gap-3 md:place-items-center lg:grid-cols-3">
                         {filteredProducts.map((product) => {
@@ -45,15 +45,15 @@ const ProductList = ({ products }: ProductListProps) => {
 
                             return (
                                 <section key={product.id} className="flex flex-col items-center border p-3 gap-4 mx-2 md:mx-0">
-                                    <h3 className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md">{product.category}</h3>
-                                    <h1 className="font-semibold text-xl line-clamp-1">{product.title}</h1>
+                                    <h3 className="self-start p-2 bg-white rounded-xl text-sm drop-shadow-md" aria-label={`Categoria ${product.category}`}>{product.category}</h3>
+                                    <h1 className="font-semibold text-xl line-clamp-1" aria-label={`Nome do produto: ${product.title}`}>{product.title}</h1>
 
                                     <Image src={product.thumbnail} alt={product.title} width={500} height={500} />
-                                    <p className="text-center line-clamp-2">{product.description}</p>
+                                    <p className="text-center line-clamp-2" aria-label={`Descrição do produto ${product.title}`}>{product.description}</p>
                                     <div className="flex items-center justify-around w-full">
-                                        <p className="text-2xl font-semibold border-b-2 px-2 transition-colors hover:border-slate-900">$ {product.price}</p>
+                                        <p className="text-2xl font-semibold border-b-2 px-2 transition-colors hover:border-slate-900" aria-label={`Preço do produto ${product.title}`}>$ {product.price}</p>
                                         <Link href={`/products/${product.id}`}>
-                                            <Button variant="link">Mais detalhes</Button>
+                                            <Button variant="link" aria-label="Mais detalhes">Mais detalhes</Button>
                                         </Link>
                                     </div>
                                     <Button
@@ -61,6 +61,8 @@ const ProductList = ({ products }: ProductListProps) => {
                                         className="w-full mt-4"
                                         onClick={() => addToCart(product)}
                                         disabled={alreadyInCart}
+                                        aria-disabled={alreadyInCart}
+                                        aria-label={alreadyInCart ? "Adicionado no carrinho" : "Adicionar no carrinho"}
                                     >
                                         <ShoppingCart /> {alreadyInCart ? "Adicionado" : "Adicionar no carrinho"}
                                     </Button>

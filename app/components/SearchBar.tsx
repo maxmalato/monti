@@ -19,6 +19,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
                 <Input 
                     placeholder="Pesquise seu produto" 
                     onChange={handleInputChange}
+                    aria-label="Pesquise seu produto"
                 />
                 <Search />
             </div>

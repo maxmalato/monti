@@ -21,10 +21,12 @@ const Categories = ({ products, onSelectCategory }: CategoriesProps) => {
     }
 
     return (
-        <div className="flex gap-2 overflow-x-auto py-2 mx-10 md:justify-center md:mx-0">
+        <div className="flex gap-2 overflow-x-auto py-2 mx-10 md:justify-center md:mx-0" role="group" aria-label="Categorias de produtos">
             <Button
                 onClick={() => handleCategoryClick(null)}
                 variant={`${selectedCategory === null ? "default" : "outline"}`}
+                aria-pressed={selectedCategory === null}
+                aria-label="Mostrar todos as categorias"
             >
                 All
             </Button>
@@ -33,6 +35,8 @@ const Categories = ({ products, onSelectCategory }: CategoriesProps) => {
                     key={category}
                     onClick={() => handleCategoryClick(category)}
                     variant={`${selectedCategory === category ? "default" : "ghost"}`}
+                    aria-pressed={selectedCategory === category}
+                    aria-label={`Mostrar produtos da categoria ${category}`}
                 >
                     {category}
                 </Button>

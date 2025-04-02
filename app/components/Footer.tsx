@@ -10,10 +10,10 @@ const Footer = () => {
     const currentYear = new Date().getFullYear()
 
     return (
-        <footer className="border-t mt-10 pt-4 px-4">
+        <footer className="border-t mt-10 pt-4 px-4" aria-label="Footer">
             <section className="flex justify-center gap-8 mb-7">
                 <div className="flex gap-1 transition-colors hover:text-pink-600 cursor-pointer">
-                    <Instagram />
+                    <Instagram  aria-hidden="true"/>
                     <p>Instagram</p>
                 </div>
                 <div className="flex gap-1 transition-colors hover:text-blue-500 cursor-pointer">
@@ -23,7 +23,7 @@ const Footer = () => {
             </section>
 
             <div className="md:flex md:gap-16 md:mb-10">
-                <section className="md:w-full">
+                <section className="md:w-full" aria-label="Empresa">
                     <h2 className="font-semibold text-lg">Empresa</h2>
                     <Accordion type="single" collapsible className="w-full">
                         <AccordionItem value="item-1">
@@ -47,19 +47,19 @@ const Footer = () => {
                     </Accordion>
                 </section>
 
-                <section className="mt-5 mb-6 md:w-full md:mt-0">
+                <section className="mt-5 mb-6 md:w-full md:mt-0" aria-label="Contato">
                     <h2 className="font-semibold text-lg mb-3">Contato</h2>
                     <div className="flex flex-col gap-3">
                         <div className="flex gap-2 hover:text-slate-600">
-                            <Phone />
+                            <Phone aria-hidden="true" />
                             <p className="text-sm">+55 01 91234-5678</p>
                         </div>
                         <div className="flex gap-2 hover:text-slate-600">
-                            <AtSign />
+                            <AtSign aria-hidden="true" />
                             <a href="mailto:contato@monti.com.br">contato@monti.com.br</a>
                         </div>
                         <div className="flex gap-2 hover:text-slate-600">
-                            <MapPin />
+                            <MapPin aria-hidden="true" />
                             <p>Rua das amendoeras, 23, Centro - São Luís - MA</p>
                         </div>
                     </div>
