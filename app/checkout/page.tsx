@@ -182,6 +182,7 @@ const CheckoutPage: React.FC = () => {
                             <Label htmlFor="phone">Telefone:</Label>
                             <Input
                                 type="text"
+                                inputMode="numeric"
                                 id="phone"
                                 value={phone}
                                 placeholder="(99) 98820-3040"
@@ -194,6 +195,7 @@ const CheckoutPage: React.FC = () => {
                             <Label htmlFor="cep">CEP:</Label>
                             <Input
                                 type="text"
+                                inputMode="numeric"
                                 id="cep"
                                 value={cep}
                                 placeholder="91000-000"
